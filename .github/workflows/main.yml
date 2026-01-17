@@ -1,0 +1,15 @@
+name: Test Homebrew Formula
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run brew test-bot
+        run: brew test-bot --only-formulae
