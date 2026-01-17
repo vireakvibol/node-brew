@@ -5,7 +5,7 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [macOS-14-arm64, macos-14]
+        os: [macos-13, macos-14]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set up Homebrew
@@ -14,12 +14,14 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up and test local tap
+      - name: Set up tap, unlink conflicts, and test
         run: |
           # Create a directory for the tap
           mkdir -p "$(brew --repository)/Library/Taps/vireakvibol"
           # Symlink the current repository into the taps directory
           ln -s "$GITHUB_WORKSPACE" "$(brew --repository)/Library/Taps/vireakvibol/homebrew-nodejs-brew"
+          # Unlink the conflicting pre-installed node version
+          brew unlink node@20 || true
           # Now, install and test the formula by its name
           brew install nodejs-brew
           brew test nodejs-brew
