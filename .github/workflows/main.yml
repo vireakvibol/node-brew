@@ -19,9 +19,9 @@ jobs:
           # Create a directory for the tap
           mkdir -p "$(brew --repository)/Library/Taps/vireakvibol"
           # Symlink the current repository into the taps directory
-          ln -s "$GITHUB_WORKSPACE" "$(brew --repository)/Library/Taps/vireakvibol/homebrew-nodejs-brew"
+          ln -s "$GITHUB_WORKSPACE" "$(brew --repository)/Library/Taps/vireakvibol/homebrew-node-brew"
           # Unlink the conflicting pre-installed node version
           brew unlink node@20 || true
           # Now, install and test the formula by its name
-          brew install nodejs-brew
-          brew test nodejs-brew
+          brew install node-brew
+          brew test node-brew

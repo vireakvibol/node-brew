@@ -18,7 +18,7 @@ This formula is specifically configured for the following environment:
 
 2.  **Install Node.js:**
     ```sh
-    brew install nodejs-brew
+    brew install node-brew
     ```
 
 ## Continuous Integration with GitHub Actions
