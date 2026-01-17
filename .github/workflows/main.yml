@@ -16,5 +16,5 @@ jobs:
 
       - name: Install and test formula
         run: |
-          brew install .
-          brew test .
+          brew install ./node.rb
+          brew test ./node.rb
