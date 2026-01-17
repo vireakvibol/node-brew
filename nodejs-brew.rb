@@ -1,4 +1,4 @@
-class Node < Formula
+class NodejsBrew < Formula
   desc "Platform for building fast and scalable server applications"
   homepage "https://nodejs.org/"
   version "24.13.0"

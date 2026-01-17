@@ -5,7 +5,7 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [macos-13, macos-14] # macos-13 is Intel, macos-14 is Apple Silicon
+        os: [macOS-14-arm64, macos-14]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set up Homebrew
@@ -21,5 +21,5 @@ jobs:
           # Symlink the current repository into the taps directory
           ln -s "$GITHUB_WORKSPACE" "$(brew --repository)/Library/Taps/vireakvibol/homebrew-nodejs-brew"
           # Now, install and test the formula by its name
-          brew install node
-          brew test node
+          brew install nodejs-brew
+          brew test nodejs-brew
