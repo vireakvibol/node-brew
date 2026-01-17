@@ -3,13 +3,18 @@ on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: macos-latest
+    strategy:
+      matrix:
+        os: [macos-13, macos-14] # macos-13 is Intel, macos-14 is Apple Silicon
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+        uses: Homebrew/actions/setup-homebrew@v1
 
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Run brew test-bot
-        run: brew test-bot --only-formulae
+      - name: Install and test formula
+        run: |
+          brew install .
+          brew test .

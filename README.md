@@ -6,8 +6,8 @@ This repository provides a custom [Homebrew](https://brew.sh/) formula to instal
 
 This formula is specifically configured for the following environment:
 
-- **Operating System:** macOS (Intel-based)
-- **Node.js Version:** 24.x.x
+- **Operating System:** macOS (Intel & Apple Silicon)
+- **Node.js Version:** 24.13.0
 
 ## How to Install
 
