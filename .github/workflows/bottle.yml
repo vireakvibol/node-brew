@@ -1,0 +1,21 @@
+name: Create Bottle
+on:
+  # This workflow runs automatically whenever you push to the `main` branch.
+  push:
+    branches:
+      - main
+
+jobs:
+  bottle:
+    # We use a macOS runner that matches the target architecture.
+    runs-on: macos-latest
+    steps:
+      - name: Create bottle and update formula
+        # This official Homebrew action does all the heavy lifting.
+        uses: Homebrew/actions/create-bottle-and-pr@v1
+        with:
+          # The name of the formula file to bottle (e.g., node.rb).
+          formula: "node"
+          # This token is required for the action to upload the bottle to
+          # GitHub Releases and commit the updated formula file.
+          token: ${{ secrets.HOMEBREW_GITHUB_API_TOKEN }}
