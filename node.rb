@@ -1,25 +1,22 @@
 class Node < Formula
   desc "Platform for building fast and scalable server applications"
   homepage "https://nodejs.org/"
-  # The user requested a formula for Node.js 24.
-  # When Node.js 24 is released, you can update the URL and SHA256 below.
-  # For now, we are using version 22.2.0 as an example.
-  url "https://nodejs.org/dist/v22.2.0/node-v22.2.0.tar.gz"
-  sha256 "9857386001004313b3aebd8885b5c97753177c681c741e93864b97143f62886f"
 
-  # Node.js requires Python for its build process.
-  depends_on "python@3.12" => :build
+  # This formula is configured to download the pre-compiled binary for macOS on Intel processors.
+  # When Node.js 24 is released, update the URL and SHA256 to point to the correct darwin-x64 binary.
+  # For now, we are using version 22.2.0 as an example.
+  url "https://nodejs.org/dist/v22.2.0/node-v22.2.0-darwin-x64.tar.gz"
+  sha256 "023b1856c198751515235a498f309a473f3095393b4a205d86248d2d6c138f61"
 
   def install
-    # These commands are the standard way to build and install Node.js from source.
-    # The `--prefix` flag ensures it gets installed into the correct Homebrew directory.
-    system "./configure", "--prefix=#{prefix}"
-    system "make", "install"
+    # The pre-compiled binary tarball contains the 'bin', 'include', 'lib', and 'share' directories.
+    # We simply copy all of that into the formula's installation directory (the "prefix").
+    # Homebrew automatically handles the rest.
+    prefix.install Dir["*"]
   end
 
   test do
-    # This block defines a simple test to verify that the `node` executable is working correctly.
-    # It writes a small JavaScript file and then executes it, checking for the expected output.
+    # This test block remains to verify that the installed `node` executable is working correctly.
     (testpath/"test.js").write "console.log('hello');"
     assert_equal "hello", shell_output("#{bin}/node test.js").strip
   end
