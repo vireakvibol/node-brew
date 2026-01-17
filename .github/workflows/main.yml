@@ -14,7 +14,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Install and test formula
+      - name: Set up and test local tap
         run: |
-          brew install ./node.rb
-          brew test ./node.rb
+          # Create a directory for the tap
+          mkdir -p "$(brew --repository)/Library/Taps/vireakvibol"
+          # Symlink the current repository into the taps directory
+          ln -s "$GITHUB_WORKSPACE" "$(brew --repository)/Library/Taps/vireakvibol/homebrew-nodejs-brew"
+          # Now, install and test the formula by its name
+          brew install node
+          brew test node
